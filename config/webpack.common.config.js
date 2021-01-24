@@ -4,17 +4,19 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const webpack = require('webpack');
+const resolve = dir => path.join(__dirname, '..', dir);
 
 module.exports = {
   entry: {
-    app: './src/index.js',
+    app: resolve('./src/index.js'),
   },
   output: {
     filename: '[name].bundle.[contenthash:8].js',
-    path: path.resolve(__dirname, 'dist'),
+    path: resolve('dist'),
     chunkFilename: '[name].chunk.[contenthash:8].js',
     // crossOriginLoading: 'use-credentials',
   },
+  target: 'web',
   cache: true,
   module: {
     rules: [
@@ -29,7 +31,7 @@ module.exports = {
       },
       {
         test: /\.(css|less)$/,
-        exclude: path.resolve(__dirname, 'node_modules'),
+        exclude: resolve('node_modules'),
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -45,7 +47,7 @@ module.exports = {
       },
       {
         test: /\.(css|less)$/,
-        exclude: path.resolve(__dirname, 'src'),
+        exclude: resolve('src'),
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -84,7 +86,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'My project',
       filename: 'index.html',
-      template: path.join(__dirname, 'src/index.html'),
+      template: resolve('src/index.html'),
       inject: 'body',
     }),
     new webpack.HotModuleReplacementPlugin(),
@@ -94,6 +96,13 @@ module.exports = {
       ignoreOrder: false,
     }),
   ],
+  resolve: {
+    alias: {
+      '@': resolve('src'),
+      'component': resolve('src/component'),
+      'store': resolve('src/store'),
+    }
+  },
   optimization: {
     moduleIds: 'named',
     splitChunks: {

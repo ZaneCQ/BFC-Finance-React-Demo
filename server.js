@@ -4,7 +4,7 @@ const path = require('path');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 
 const app = express();
-const config = require('./webpack.common.config.js');
+const config = require('./config/webpack.common.config.js');
 /* const compiler = webpack(config);
 app.use(webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath

@@ -1,19 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDom from 'react-dom';
-import { Typography } from 'antd';
-import style from './styles.less';
+import { Provider } from 'react-redux';
+import App from './App.js';
+import stores from './store';
+console.log('stores:', stores)
+const render = Component => (
+    ReactDom.render(
+        <Provider store={stores}>
+            <Component />
+        </Provider>,
+        document.getElementById('app')
+    )
+);
 
-const { Title } = Typography;
+render(App);
 
-class App extends Component {
-    render() {
-        let greeting = `Hi 😀, this is my common webpack5 configuration for react projects.`;
-        return (
-            <div className={style['mainContainer']}>
-                <Title>{greeting}</Title>
-            </div>
-        )
-    }
+// Webpack Hot Module Replacement API
+if (module.hot) {
+    module.hot.accept('./App', () => {
+        render(App);
+    });
 }
-
-ReactDom.render(<App />, document.getElementById('app'));
