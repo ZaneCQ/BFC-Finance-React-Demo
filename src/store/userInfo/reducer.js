@@ -5,7 +5,7 @@ const initalState = {
     company: '',
 }
 
-const userData = (state = initalState, action) => {
+const userInfo = (state = initalState, action) => {
     switch(action.type) {
         case 'change':
             return { ...state, ...action.text }
@@ -14,4 +14,4 @@ const userData = (state = initalState, action) => {
     }
 }
 
-export default userData;
+export default userInfo;

@@ -17,6 +17,7 @@ module.exports = merge(common, {
     contentBase: resolve('dist'),
     hot: true,
     https: false,
+    clientLogLevel: 'none',
     open: true
   }
 });

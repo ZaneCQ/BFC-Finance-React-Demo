@@ -3,7 +3,9 @@ import ReactDom from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './App.js';
 import stores from './store';
-console.log('stores:', stores)
+import './global.less';
+
+console.log('stores:', stores);
 const render = Component => (
     ReactDom.render(
         <Provider store={stores}>
@@ -18,6 +20,7 @@ render(App);
 // Webpack Hot Module Replacement API
 if (module.hot) {
     module.hot.accept('./App', () => {
+        console.log('---- hot ----')
         render(App);
     });
 }

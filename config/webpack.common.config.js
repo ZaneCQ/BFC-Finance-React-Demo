@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+// const darkTheme = require('@ant-design/dark-theme');
 const webpack = require('webpack');
 const resolve = dir => path.join(__dirname, '..', dir);
 
@@ -36,12 +37,18 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
-            options: { modules: { localIdentName: '[path][name]--[contenthash:8]' } }
+            options: { modules: { localIdentName: '[path][name]-[local]-[contenthash:8]' } }
           },
           'postcss-loader',
           {
             loader: "less-loader",
-            options: { lessOptions: { javascriptEnabled: true }, sourceMap: true }
+            options: {
+              lessOptions: {
+                // modifyVars: darkTheme,
+                javascriptEnabled: true,
+              },
+              sourceMap: true
+            }
           }
         ]
       },
@@ -57,7 +64,13 @@ module.exports = {
           'postcss-loader',
           {
             loader: "less-loader",
-            options: { lessOptions: { javascriptEnabled: true }, sourceMap: true }
+            options: {
+              lessOptions: {
+                // modifyVars: darkTheme,
+                javascriptEnabled: true,
+              },
+              sourceMap: true
+            }
           }
         ]
       },
