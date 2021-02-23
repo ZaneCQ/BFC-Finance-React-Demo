@@ -3,9 +3,9 @@ import ReactDom from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './App.js';
 import stores from './store';
-import './global.less';
+import './global.css';
 
-console.log('stores:', stores);
+console.log('stores:', stores, stores.getState());
 const render = Component => (
     ReactDom.render(
         <Provider store={stores}>

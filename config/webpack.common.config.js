@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-// const darkTheme = require('@ant-design/dark-theme');
 const webpack = require('webpack');
 const resolve = dir => path.join(__dirname, '..', dir);
 
@@ -32,7 +31,10 @@ module.exports = {
       },
       {
         test: /\.(css|less)$/,
-        exclude: resolve('node_modules'),
+        exclude: [
+          resolve('node_modules'),
+          /global\.css$/
+        ],
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -44,7 +46,6 @@ module.exports = {
             loader: "less-loader",
             options: {
               lessOptions: {
-                // modifyVars: darkTheme,
                 javascriptEnabled: true,
               },
               sourceMap: true
@@ -54,7 +55,9 @@ module.exports = {
       },
       {
         test: /\.(css|less)$/,
-        exclude: resolve('src'),
+        exclude: [
+          resolve('src'),
+        ],
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -66,11 +69,24 @@ module.exports = {
             loader: "less-loader",
             options: {
               lessOptions: {
-                // modifyVars: darkTheme,
                 javascriptEnabled: true,
               },
               sourceMap: true
             }
+          }
+        ]
+      },
+      {
+        test: /global\.css$/, // global.css should not be converted to css module
+        include: [
+          resolve('src'),
+        ],
+        exclude: /node_modules/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: { modules: false }
           }
         ]
       },
@@ -101,6 +117,7 @@ module.exports = {
       filename: 'index.html',
       template: resolve('src/index.html'),
       inject: 'body',
+      favicon: resolve('static/images/icon.ico'),
     }),
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
@@ -111,9 +128,10 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      '@': resolve('src'),
-      'component': resolve('src/component'),
-      'store': resolve('src/store'),
+      '@': resolve('src/'),
+      'component': resolve('src/component/'),
+      'store': resolve('src/store/'),
+      'static': resolve('static/'),
     }
   },
   optimization: {
