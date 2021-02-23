@@ -1,62 +1,93 @@
 import React, { Component } from 'react';
+import { Form, Icon, Input, Button, Checkbox, message } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import logo from 'static/images/logo.png';
 import style from './index.less';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+
 const { Item } = Form;
-const tailLayout = {
-    wrapperCol: { offset: 8, span: 16 },
-};
 class Login extends Component {
+    state = {
+        remember: false
+    }
     onFinish = (values) => {
+        const { username, password } = values;
         console.log('Success:', values);
+        if (username.trim().length === 0 || password.trim().length === 0) {
+            message.warn('Enter correct info');
+        }
     };
 
     onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
-    /* handleSubmit = e => {
-        e.preventDefault();
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                console.log('Received values of form: ', values);
-            }
+
+    onRemember = (e) => {
+        this.setState({
+            remember: e.target.checked
         });
-    }; */
+    }
 
     render() {
         return (
             <div className={style['loginContainer']}>
+                <div className={style['logo']}>
+                    <img src={logo} />
+                </div>
                 <div className={style['loginForm']}>
                     <Form
-                        labelCol={{ span: 8 }}
-                        wrapperCol={{ span: 16 }}
+                        labelCol={{ span: 6 }}
+                        wrapperCol={{ span: 18 }}
                         name="loginForm"
                         initialValues={{ remember: true }}
                         onFinish={this.onFinish}
                         onFinishFailed={this.onFinishFailed}
                     >
-                        <Item
-                            label="Username"
+                        <Form.Item
                             name="username"
-                            rules={[{ required: true, message: 'Please input your username!' }]}
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Username is required!',
+                                },
+                            ]}
                         >
-                            <Input />
-                        </Item>
-
-                        <Item
-                            label="Password"
+                            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+                        </Form.Item>
+                        <Form.Item
                             name="password"
-                            rules={[{ required: true, message: 'Please input your password!' }]}
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Password is required!',
+                                },
+                            ]}
+                            style={{
+                                marginBottom: '4px'
+                            }}
                         >
-                            <Input.Password />
-                        </Item>
+                            <Input
+                                prefix={<LockOutlined className="site-form-item-icon" />}
+                                type="password"
+                                placeholder="Password"
+                            />
+                        </Form.Item>
 
-                        <Item {...tailLayout} name="remember" valuePropName="checked">
-                            <Checkbox>Remember me</Checkbox>
-                        </Item>
+                        <Form.Item
+                            style={{
+                                marginBottom: '4px'
+                            }}
+                        >
+                            <Form.Item className={style['remember']} name="remember" valuePropName={false} noStyle>
+                                <Checkbox onChange={this.onRemember}>Remember me</Checkbox>
+                            </Form.Item>
 
-                        <Item {...tailLayout}>
-                            <Button type="primary" htmlType="submit">Submit</Button>
-                        </Item>
+                            <a className={style['forgot']} href="">Forgot password</a>
+                        </Form.Item>
+
+                        <Form.Item>
+                            <Button type="primary" htmlType="submit" className={style['submit-button']}>Log in</Button>
+                            Or <a href="">register now!</a>
+                        </Form.Item>
                     </Form>
                 </div>
             </div >
