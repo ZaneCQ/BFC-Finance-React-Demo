@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 class Home extends Component {
-    constructor(props) {
-        super(props);
-        console.log('this.props:', this.props)
-    }
     render() {
+        console.log('home render')
         const { userInfo } = this.props;
-        return userInfo.name.length === 0 ? (
-            <Redirect to='login' />
-        ) : <div>This is Home</div>;
+        console.log('user:', userInfo);
+        if (userInfo.name.length === 0) {
+            return <Redirect to='login' />;
+        }
+        return <div>This is Home</div>;
     }
 }
 
-export default connect(state => ({
-    userInfo: state.userInfo
-}), {})(Home);
+const mapStateToProps = state => ({ userInfo: state.userInfo });
+const mapDispatchToProps = dispatch => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

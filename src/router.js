@@ -5,7 +5,6 @@ import Login from 'component/Login';
 import Register from 'component/Register';
 import NotFound from 'component/NotFound';
 
-console.log();
 class Routes extends Component {
     render() {
         return (

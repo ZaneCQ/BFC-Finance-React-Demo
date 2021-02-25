@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, Checkbox, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { connect } from 'react-redux';
+import { login } from 'store/actions/userInfo';
 import logo from 'static/images/logo.png';
 import style from './index.less';
-
-const { Item } = Form;
 class Login extends Component {
     state = {
         remember: false
     }
     onFinish = (values) => {
+        const { history, handleLogin } = this.props;
         const { username, password } = values;
-        console.log('Success:', values);
         if (username.trim().length === 0 || password.trim().length === 0) {
             message.warn('Enter correct info');
+        } else {
+            handleLogin({
+                name: username,
+                password
+            });
+            history.push('/');
         }
     };
 
@@ -28,6 +34,7 @@ class Login extends Component {
     }
 
     render() {
+        // console.log('props:', this.props);
         return (
             <div className={style['loginContainer']}>
                 <div className={style['logo']}>
@@ -95,5 +102,12 @@ class Login extends Component {
     }
 }
 
+const mapStateToProps = state => ({
+    userInfo: state.userInfo
+});
 
-export default Login;
+const mapDispatchToProps = dispatch => ({
+    handleLogin: data => dispatch(login(data))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
