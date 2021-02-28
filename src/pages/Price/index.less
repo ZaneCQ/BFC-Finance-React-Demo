@@ -1,18 +1,64 @@
+.listContainer {
+    width: 100%;
+    height: calc(100vh - 80px);
+}
+
 .ListItemOdd {
     background-color: aliceblue;
     display: flex;
+    margin-bottom: 1px;
 }
+
 .ListItemEven {
     background-color: antiquewhite;
     display: flex;
+    margin-bottom: 1px;
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
 }
 
 .splitter {
     flex: 1;
-    margin: 0px 10px;
+    display: inline-block;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+}
+
+.splitter:first-child {
+    flex: none;
+    width: 100px;
+}
+
+.splitter:not(:last-child) {
+    border-right: 1px solid white;
 }
 
 .priceList {
     width: 100%;
     height: '200';
+}
+
+.title {
+    height: 50px;
+    display: flex;
+    padding-right: 17px;
+    background-color: #faad14;
+    color: rgb(0 0 0);
+    font-size: medium;
+    font-weight: bold;
+}
+
+.up {
+    color: red;
+}
+
+.down {
+    color: green;
 }

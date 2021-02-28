@@ -2,20 +2,11 @@ export const FETCH_START = 'fetchStart';
 export const FETCH_SUCCESS = 'fetchSuccess';
 export const FETCH_FAILED = 'fetchFailed';
 export const UPDATE_LIST = 'updateList';
-export const SET_PRICE = 'setPrice';
 
 export function updateList(list) {
+    console.log('list:', list)
     return {
         type: UPDATE_LIST,
-        text: {
-            list
-        }
-    }
-}
-
-export function setPrice(list) {
-    return {
-        type: SET_PRICE,
         text: {
             list
         }
@@ -32,12 +23,11 @@ export function doFetch(url) {
     }
 }
 
-export function fetchSuccess(data) {
+export function fetchSuccess(list) {
     return {
         type: FETCH_SUCCESS,
         text: {
             fetching: false,
-            data
         }
     }
 }
@@ -47,7 +37,6 @@ export function fetchFailed() {
         type: FETCH_FAILED,
         text: {
             fetching: false,
-            data: []
         }
     }
 }
@@ -67,36 +56,27 @@ export function fetchSomething(url, options, dispatch) {
     });
 }
 
-export function getList(dispatch) {
-    const URL = 'https://api.coingecko.com/api/v3/coins/list';
-    return fetchSomething(URL, {}, dispatch).then(data => {
-        let list = {};
-        data.forEach(item => {
-            list[item.id] = {
-                id: item.id,
-                symbol: item.symbol, 
-                name: item.name,
-                value: 'N/A'
-            }
-        });
-        dispatch(updateList(list));
-        return data.slice(0, 99).map(item => item.id);
-        // return data.map(item => item.id);
-    });
-}
-
 export function getPrices() {
-    let URL = 'https://api.coingecko.com/api/v3/simple/price';
     return function (dispatch) {
-        return getList(dispatch).then(data => {
-            URL = `${URL}?ids=${data.join(',')}&vs_currencies=usd`;
-            return fetchSomething(URL, {
-                method: 'GET'
-            }, dispatch).then(data => {
-                dispatch(fetchSuccess(data));
-                dispatch(setPrice(data))
-                return data;
-            });
-        })
+        const count = 250;
+        let URL = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${count}&page=1&sparkline=false`;
+        return fetchSomething(URL, {
+            method: 'GET'
+        }, dispatch).then(data => {
+            console.log('=============:', data);
+            dispatch(fetchSuccess());
+            dispatch(updateList(data.map(item => ({
+                id: item.id,
+                name: item.name,
+                symbol: item.symbol,
+                price: item.current_price,
+                low: item.low_24h,
+                high: item.high_24h,
+                image: item.image,
+                change: item.price_change_24h,
+                changePercentage: item.price_change_percentage_24h,
+            }))));
+            return data;
+        });
     };
 }

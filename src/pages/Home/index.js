@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
+import Header from 'components/Header';
 class Home extends Component {
     /* constructor (props) {
         super(props);
@@ -14,7 +15,13 @@ class Home extends Component {
     } */
 
     render() {
-        return <div>This is Home</div>;
+        const { history } = this.props;
+        return (
+            <Fragment>
+                <Header history={history} />
+                <div>This is Home</div>
+            </Fragment>
+        );
     }
 }
 
