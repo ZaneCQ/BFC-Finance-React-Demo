@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
-import Home from 'component/Home';
-import Login from 'component/Login';
-import Register from 'component/Register';
-import NotFound from 'component/NotFound';
+import Home from 'pages/Home';
+import Login from 'pages/Login';
+import Register from 'pages/Register';
+import NotFound from 'pages/NotFound';
+import Price from 'pages/Price';
 
 class Routes extends Component {
     render() {
@@ -13,6 +14,7 @@ class Routes extends Component {
                     <Route path="/" exact component={Home} />
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
+                    <Route path="/price" component={Price} />
                     <Route path="/404" component={NotFound} />
                     <Redirect to="/404" />
                 </Switch>

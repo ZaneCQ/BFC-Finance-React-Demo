@@ -1,16 +1,21 @@
-const initalState = {
+const initialState = {
     name: '',
-    age: 0,
-    gender: 'Male',
-    company: '',
+    info: {
+        age: 0,
+        gender: 'Male',
+        company: '',
+    }
 }
 
-const userInfo = (state = initalState, action) => {
-    switch(action.type) {
-        case 'change':
-            return { ...state, ...action.text }
+const CHANGE = 'change';
+
+const userInfo = (state = initialState, action) => {
+    switch (action.type) {
+        case CHANGE:
+            console.log('action:', action, state);
+            return { ...state, ...action.text };
         default:
-            return state; 
+            return state;
     }
 }
 

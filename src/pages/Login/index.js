@@ -108,6 +108,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     handleLogin: data => dispatch(login(data))
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

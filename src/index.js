@@ -5,7 +5,6 @@ import App from './App.js';
 import stores from './store';
 import './global.css';
 
-// console.log('stores:', stores, stores.getState());
 const render = Component => (
     ReactDom.render(
         <Provider store={stores}>

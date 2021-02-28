@@ -129,7 +129,8 @@ module.exports = {
   resolve: {
     alias: {
       '@': resolve('src/'),
-      'component': resolve('src/component/'),
+      'components': resolve('src/components/'),
+      'pages': resolve('src/pages/'),
       'store': resolve('src/store/'),
       'static': resolve('static/'),
     }
