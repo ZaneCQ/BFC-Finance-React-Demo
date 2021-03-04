@@ -4,7 +4,6 @@ export const FETCH_FAILED = 'fetchFailed';
 export const UPDATE_LIST = 'updateList';
 
 export function updateList(list) {
-    console.log('list:', list)
     return {
         type: UPDATE_LIST,
         text: {
@@ -63,7 +62,7 @@ export function getPrices() {
         return fetchSomething(URL, {
             method: 'GET'
         }, dispatch).then(data => {
-            console.log('=============:', data);
+            // console.log('=============:', data);
             dispatch(fetchSuccess());
             dispatch(updateList(data.map(item => ({
                 id: item.id,

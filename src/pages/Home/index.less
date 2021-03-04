@@ -1,0 +1,74 @@
+@import '@/global.less';
+
+.home-wrapper {
+    width: 100%;
+    height: calc(100vh - @HeaderHeight);
+    background-image: linear-gradient(0deg, #002c5a, #004a95);
+    padding: 2rem 0;
+}
+
+.container {
+    width: 900px;
+    min-height: 100%;
+    margin: auto;
+    text-align: center;
+    border-radius: 2rem;
+    background-color: rgba(0, 0, 0, .25);
+    color: white;
+}
+
+.total {
+    width: 100%;
+    font-size: 2.5rem;
+    font-weight: bold;
+    padding: 40px 0px 0px 0px;
+
+    .total-text {
+        line-height: 3rem;
+    }
+
+    .amount {
+        color: #ff2f00;
+        font-size: 3.5rem;
+    }
+}
+
+.deposit-label {
+    width: 100%;
+    font-size: 1.5rem;
+    text-align: left;
+    padding: 10px 0px 20px 30px;
+}
+
+.deposit-list {
+    width: 100%;
+    font-size: 1.5rem;
+
+    table {
+        width: 100%;
+        text-align: left;
+        border: 1px solid black;
+
+        tbody {
+            border-radius: 1rem;
+        }
+
+        tr {
+            padding: 20px 0px;
+            border-bottom: 1px solid black;
+        }
+
+        td:first-child {
+            padding-left: 40px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+    }
+}
+
+.deposit-item {
+    width: 100%;
+    padding: 20px 0px;
+    margin-bottom: 1rem;
+    background-color: rgb(0 24 49);
+}

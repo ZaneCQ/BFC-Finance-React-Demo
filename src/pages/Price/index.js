@@ -8,11 +8,11 @@ import style from './index.less';
 
 class Price extends Component {
     componentDidMount() {
-        this.props.getPrices();
+        const p = this.props.getPrices();
+        console.log('p:', p);
     }
 
     Row = ({ data, index, style: styled }) => {
-        // console.log('styled:', styled)
         return (<div className={index % 2 ? style["ListItemOdd"] : style["ListItemEven"]} style={styled}>
             <span className={style['splitter']}><img src={data[index].image} className={style['avatar']} /></span>
             <span className={style['splitter']}>{data[index].name}</span>
@@ -31,7 +31,7 @@ class Price extends Component {
             <Fragment>
                 <Header history={history}/>
                 <Spin tip="Loading..." spinning={fetchStatus.fetching}>
-                    <div className={style['listContainer']}>
+                    <div className={style['list-wrapper']}>
                         <div className={style['title']}>
                             <span className={style['splitter']}>Avatar</span>
                             <span className={style['splitter']}>Name</span>

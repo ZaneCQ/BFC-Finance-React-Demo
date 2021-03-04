@@ -1,12 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import Header from 'components/Header';
 import style from './index.less';
 
-export default class NotFound extends Component {
+class NotFound extends Component {
     render() {
+        const { history } = this.props;
         return (
-            <div className={style['container']}>
-                <p>404 - Page Not Found!</p>
-            </div>
+            <Fragment>
+                <Header  history={history} />
+                <div className={style['container']}>
+                    <p>404 - Page Not Found!</p>
+                </div>
+            </Fragment>
         )
     }
 }
+
+export default connect(() => ({}), () => ({}))(NotFound);

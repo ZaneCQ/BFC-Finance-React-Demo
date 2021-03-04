@@ -8,19 +8,21 @@ class Header extends Component {
     onClick = path => {
         const { history } = this.props;
         console.log('Nav path:', path);
+        console.log('history:', history)
         history.push(path);
     }
 
     render() {
         console.log('props:', this.props);
-
         return (
             <div className={style['headerContainer']}>
-                <div className={style['logo']}><img src={logoImg} /></div>
+                <div className={style['logo']}><img src={logoImg} onClick={() => this.onClick('/')} /></div>
                 <div className={style['nav']}>
-                    <span onClick={() => this.onClick('/')} className={style['navItem']}> <HomeOutlined /> Home</span>
-                    <span onClick={() => this.onClick('/price')} className={style['navItem']}><DollarCircleOutlined /> Price</span>
-                    <span className={`${style['navItem']} ${style['nav_connect']}`}><ApiOutlined /> Connect to MetaMask</span>
+                    <span onClick={() => this.onClick('/')} className={`${style['navItem']}`}> <HomeOutlined /> Home</span>
+                    <span onClick={() => this.onClick('/price')} className={`${style['navItem']}`}><DollarCircleOutlined /> Price</span>
+                </div>
+                <div className={style['connect']}>
+                    <span className={`${style['connect-btn']}`}><ApiOutlined /> Connect to MetaMask</span>
                 </div>
             </div>
         )
