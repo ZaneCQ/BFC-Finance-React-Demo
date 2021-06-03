@@ -7,6 +7,7 @@ const initialState = {
 }
 
 const price = (state = initialState, action) => {
+    // console.log('price:', action, state);
     switch (action.type) {
         case FETCH_START:
             return { ...state, url: action.text.url, fetching: action.text.fetching, };

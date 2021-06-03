@@ -5,6 +5,7 @@ const initalState = {
 const JUMP = 'Jump';
 
 const homeData = (state = initalState, action) => {
+    // console.log('home:', action, state)
     switch(action.type) {
         case JUMP:
             return { ...state, page: action.text }

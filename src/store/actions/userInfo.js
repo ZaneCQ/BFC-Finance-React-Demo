@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, CONNECT, DISCONNECT } from 'store/actions/userInfo';
+import { LOGIN, LOGOUT, CONNECT, DISCONNECT } from 'store/reducers/userInfo';
 export function login(text) {
     return {
         type: LOGIN,
